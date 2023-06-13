@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+public class Question7 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the array: ");
+        int[] nums = new int[scanner.nextInt()];
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = scanner.nextInt();
+        }
+
+        System.out.print("Enter the target value: ");
+        int target = scanner.nextInt();
+
+        int[] range = findRangeOfTarget(nums, target);
+        System.out.println("The range of the target value is " + range[0] + " to " + range[1]);
+    }
+
+    private static int[] findRangeOfTarget(int[] nums, int target) {
+        int low = 0;
+        int high = nums.length - 1;
+        int start = -1;
+        int end = -1;
+
+        while (low <= high) {
+            int mid = (low + high) / 2;
+
+            if (nums[mid] == target) {
+                start = mid;
+                end = mid;
+                while (start > 0 && nums[start - 1] == target) {
+                    start--;
+                }
+                while (end < nums.length - 1 && nums[end + 1] == target) {
+                    end++;
+                }
+                break;
+            } else if (nums[mid] < target) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+
+        return new int[]{start, end};
+    }
+}
