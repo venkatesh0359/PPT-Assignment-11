@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class Question1 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int x = scanner.nextInt();
+
+        int sqrt = findSquareRoot(x);
+        System.out.println("The square root of " + x + " is " + sqrt);
+    }
+
+    private static int findSquareRoot(int x) {
+        int low = 0;
+        int high = x;
+
+        while (low <= high) {
+            int mid = (low + high) / 2;
+
+            if (mid * mid <= x) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+
+        return low - 1;
+    }
+}
